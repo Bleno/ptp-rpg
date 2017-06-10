@@ -1,26 +1,24 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "menu.h"
 #include "choose.h"
-#include "score.h"
 
 
-void menu(){
+void choose(){
 	int opt = 0;
-	printf("Digite uma opcao\n");
-	printf(" 1 - Novo Jogo\n 2 - Records\n 3 - Sair\n");
+	printf("Escolha sua classe\n");
+	printf(" 1 - Guerreiro\n 2 - Arqueiro\n 3 - Mago\n");
 	while( opt == 0 || opt > 3)
 	{
 		scanf("%d", &opt);
 		switch (opt){
 			case 1:
-			  choose();
+			  printf(" >>>>> 1\n");
 			  break;
 			case 2:
-			  score();
+			  printf(" >>>>> 2\n");
 			  break;
 			case 3:
-			  exit(0);
+			  printf(" >>>>> 3\n");
 			  break;
 			default:
 			  printf("opcao invalida!\n");
