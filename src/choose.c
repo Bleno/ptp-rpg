@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "choose.h"
 #include "character.h"
+#include "battle.h"
 
 
 void choose(){
@@ -15,15 +16,18 @@ void choose(){
 		switch (opt){
 			case 1:
 			  mainChar = create_character(opt);
-			  printf("Você escolheu Guerreiro!\n Helth: %0.f , \n Damage %0.f\n", mainChar.hp, mainChar.damage);
+			  printf("Você escolheu Guerreiro!\n Helth: %0.f, \n Damage %0.f\n", mainChar.hp, mainChar.damage);
+			  battle(mainChar);
 			  break;
 			case 2:
 			  mainChar = create_character(opt);
-			  printf("Você escolheu Arqueiro!\n Helth: %0.f , \n Damage %0.f\n", mainChar.hp, mainChar.damage);
+			  printf("Você escolheu Arqueiro!\n Helth: %0.f, \n Damage %0.f\n", mainChar.hp, mainChar.damage);
+			  battle(mainChar);
 			  break;
 			case 3:
 			  mainChar = create_character(opt);
-			  printf("Você escolheu Mago!\n Helth: %0.f , \n Damage %0.f\n", mainChar.hp, mainChar.damage);
+			  printf("Você escolheu Mago!\n Helth: %0.f, \n Damage %0.f\n", mainChar.hp, mainChar.damage);
+			  battle(mainChar);
 			  break;
 			default:
 			  printf("opcao invalida!\n");

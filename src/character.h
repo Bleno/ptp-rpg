@@ -23,9 +23,12 @@
 
 
 // Charazou
+// " 1 - Guerreiro\n 2 - Arqueiro\n 3 - Mago\n"
 struct character {
 	float hp;
 	float damage;
+	int classe;
+	int weapon;
 };
 
 
