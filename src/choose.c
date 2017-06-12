@@ -1,10 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "choose.h"
+#include "character.h"
 
 
 void choose(){
 	int opt = 0;
+	struct character mainChar;
 	printf("Escolha sua classe\n");
 	printf(" 1 - Guerreiro\n 2 - Arqueiro\n 3 - Mago\n");
 	while( opt == 0 || opt > 3)
@@ -12,13 +14,16 @@ void choose(){
 		scanf("%d", &opt);
 		switch (opt){
 			case 1:
-			  printf(" >>>>> 1\n");
+			  mainChar = create_character(opt);
+			  printf("Você escolheu Guerreiro!\n Helth: %0.f , \n Damage %0.f\n", mainChar.hp, mainChar.damage);
 			  break;
 			case 2:
-			  printf(" >>>>> 2\n");
+			  mainChar = create_character(opt);
+			  printf("Você escolheu Arqueiro!\n Helth: %0.f , \n Damage %0.f\n", mainChar.hp, mainChar.damage);
 			  break;
 			case 3:
-			  printf(" >>>>> 3\n");
+			  mainChar = create_character(opt);
+			  printf("Você escolheu Mago!\n Helth: %0.f , \n Damage %0.f\n", mainChar.hp, mainChar.damage);
 			  break;
 			default:
 			  printf("opcao invalida!\n");

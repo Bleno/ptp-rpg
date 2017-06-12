@@ -7,22 +7,27 @@
 
 void menu(){
 	int opt = 0;
-	printf("Digite uma opcao\n");
-	printf(" 1 - Novo Jogo\n 2 - Records\n 3 - Sair\n");
 	while( opt == 0 || opt > 3)
 	{
+		printf("Digite uma opcao\n");
+		printf(" 1 - Novo Jogo\n 2 - Records\n 3 - Sair\n");
 		scanf("%d", &opt);
 		switch (opt){
 			case 1:
+			  fflush(stdin);
 			  choose();
 			  break;
 			case 2:
+			  fflush(stdin);
 			  score();
 			  break;
 			case 3:
+			  fflush(stdin);
+			printf("Goodbye!\n");
 			  exit(0);
 			  break;
 			default:
+			  fflush(stdin);
 			  printf("opcao invalida!\n");
 		}
 	}
