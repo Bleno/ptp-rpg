@@ -29,6 +29,7 @@ struct character {
 	float damage;
 	int classe;
 	int weapon;
+	int sequence;
 };
 
 

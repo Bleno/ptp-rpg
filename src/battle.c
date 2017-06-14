@@ -29,24 +29,43 @@ void duel(int * weapon, int * weaponEnemy, struct character * mainChar, struct c
  int w = *weapon;
  int e = *weaponEnemy;
  if(w == e){
- 	printf("Empate");
+ 	printf("Empate\n");
  }else{
  	if(w == 3 && e == 1){
  		printf("Você ganhou!\n");
  		enemy->hp = enemy->hp - mainChar->damage;
+ 		rules(1, mainChar, enemy);
  	}else if( w == 1 && e ==  2){
  		printf("Você ganhou!\n");
- 		enemy->hp = enemy->hp - mainChar->damage;
+ 		rules(1, mainChar, enemy);
  	}else if(w == 2 && e == 3){
  		printf("Você ganhou!\n");
  		enemy->hp = enemy->hp - mainChar->damage;
  	}else{
  		printf("Você perdeu!\n");
- 		mainChar->hp = mainChar->hp - enemy->damage;
+ 		rules(0, mainChar, enemy);
  	}
  }
  
 }
+
+
+void rules(int victory, struct character * mainChar, struct character * enemy){
+   //victory 0 - enemy, 1 mainChar
+   if(victory == 1){
+   		if( mainChar->classe == 1){// vitoria do guerreiro
+   			if( mainChar->sequence == 1 ){
+   				enemy->hp = enemy->hp - (mainChar->damage * 2);
+   			}else{
+   				enemy->hp = enemy->hp - mainChar->damage;
+   				mainChar->sequence = 1;
+   			}
+   		}
+   }else{
+   	    mainChar->hp = mainChar->hp - enemy->damage;
+   }
+}
+
 
 void chooseWeapon(int * weapon, int * weaponEnemy){
 	int w = 0;

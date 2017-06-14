@@ -10,4 +10,6 @@ void chooseWeapon(int * weapon, int * weaponEnemy);
 
 void duel(int * weapon, int * weaponEnemy, struct character * mainChar, struct character * enemy);
 
+void rules(int victory, struct character * mainChar, struct character * enemy);
+
 #endif /* BATTLE_H_ */
