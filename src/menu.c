@@ -7,7 +7,8 @@
 
 void menu(){
 	int opt = 0;
-	while( opt == 0 || opt > 3)
+	int loop = 1;
+	while( loop == 1)
 	{
 		printf("Digite uma opcao\n");
 		printf(" 1 - Novo Jogo\n 2 - Records\n 3 - Sair\n");

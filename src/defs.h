@@ -16,3 +16,6 @@
  */
 #define WIZARD_HP 500
 #define WIZARD_DAMAGE 100
+
+
+#define MAX_BATTLES 10

@@ -12,4 +12,8 @@ void duel(int * weapon, int * weaponEnemy, struct character * mainChar, struct c
 
 void rules(int victory, struct character * mainChar, struct character * enemy);
 
+void empate(struct character * mainChar, struct character * enemy);
+
+void finalRules(struct character * mainChar, struct character * enemy);
+
 #endif /* BATTLE_H_ */

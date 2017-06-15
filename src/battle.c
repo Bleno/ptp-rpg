@@ -4,20 +4,40 @@
 #include "character.h"
 #include "battle.h"
 #include "util.h"
+#include "score.h"
 
 
 void battle(struct character mainChar){
 	struct character enemy;
-	int weapon, weaponEnemy;
-	chooseEnemy( &enemy );
-	while(enemy.hp > 0 && mainChar.hp > 0){
-		printf("Seu inimigo:\n HP: %0.f,\n Damage: %0.f\n", enemy.hp, enemy.damage );
-		printf("Você:\n HP: %0.f,\n Damage: %0.f\n", mainChar.hp, mainChar.damage );
-		chooseWeapon(&weapon, &weaponEnemy);
-		duel(&weapon, &weaponEnemy, &mainChar, &enemy);
-		//enemy.hp = 0;
-	}
+	int weapon, weaponEnemy, mainScore = 0, i, battle = 1;
+	while(battle < MAX_BATTLES  && mainChar.hp > 0){
+		chooseEnemy( &enemy );
+		printf("***************************\n BATALHA: %d\n************************\n", battle );
+		while(enemy.hp > 0 && mainChar.hp > 0){
+			printf("Seu inimigo:\n HP: %0.f,\n Damage: %0.f\n", enemy.hp, enemy.damage );
+			printf("Você:\n HP: %0.f,\n Damage: %0.f\n", mainChar.hp, mainChar.damage );
+			chooseWeapon(&weapon, &weaponEnemy);
+			duel(&weapon, &weaponEnemy, &mainChar, &enemy);
+			//enemy.hp = 0;
+		}
+		//printf("\e[1;1H\e[2J");
+		finalRules(&mainChar, &enemy);
+		if(mainChar.hp > 0){
+			countScore(&mainScore, mainChar.classe, enemy.classe);
+		}
+		battle++;
+    }
+    if(mainChar.hp <= 0){
+    	printf("\n*************\n* GAME OVER *\n* SCORE: %d*\n*************\n", mainScore);
+    }
+}
 
+
+void finalRules(struct character * mainChar, struct character * enemy){
+	if( mainChar->classe == 1 && enemy->classe == 3 && mainChar->hp > 0){// vitoria do guerreiro contra o mago
+		mainChar->hp = mainChar->hp * 0.5; // 50% de hp pela vitória
+		//TODO ACRECENTAR 100 AO HP TOTAL
+	}
 }
 
 
@@ -30,6 +50,7 @@ void duel(int * weapon, int * weaponEnemy, struct character * mainChar, struct c
  int e = *weaponEnemy;
  if(w == e){
  	printf("Empate\n");
+ 	empate(mainChar, enemy);
  }else{
  	if(w == 3 && e == 1){
  		printf("Você ganhou!\n");
@@ -50,16 +71,25 @@ void duel(int * weapon, int * weaponEnemy, struct character * mainChar, struct c
 }
 
 
+void empate(struct character * mainChar, struct character * enemy){
+	mainChar->sequence = 0;
+	enemy->sequence = 0;
+}
+
+
 void rules(int victory, struct character * mainChar, struct character * enemy){
    //victory 0 - enemy, 1 mainChar
    if(victory == 1){
-   		if( mainChar->classe == 1){// vitoria do guerreiro
+   		if( mainChar->classe == 1 && enemy->classe == 3){// vitoria do guerreiro contra o mago
    			if( mainChar->sequence == 1 ){
    				enemy->hp = enemy->hp - (mainChar->damage * 2);
    			}else{
    				enemy->hp = enemy->hp - mainChar->damage;
    				mainChar->sequence = 1;
    			}
+   		}else{
+   				enemy->hp = enemy->hp - mainChar->damage;
+   				mainChar->sequence = 0;
    		}
    }else{
    	    mainChar->hp = mainChar->hp - enemy->damage;
@@ -84,5 +114,5 @@ void chooseEnemy( struct character * enemy ){
 	//srand( time( NULL ) );
 	int r = randInt(3);
 	printf("%d\n", r);
-	*enemy = ( struct character ) create_character(r);
+	*enemy = ( struct character ) create_character(3);
 }

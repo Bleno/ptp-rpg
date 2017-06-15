@@ -36,3 +36,19 @@ void score(){
 	}
 
 }
+
+
+void countScore(int *score, int mainChar, int enemy){
+	// HIERAQUIA     | CORRESPONDENTES
+	// 3. MAGO       |  
+	// 2. ARQUEIRO   |
+	// 1. GUERREIRO  | 
+	// 0. MAGO || 3  |
+	if(mainChar == enemy){
+		*score += 150;
+	}else if( (mainChar == 3 && enemy == 2) || (mainChar == 2 && enemy == 1)  || (mainChar == 1 && enemy == 3) ){
+		*score += 100;
+	}else if((mainChar == 3 && enemy == 1) || (mainChar == 1 && enemy == 2)  || (mainChar == 2 && enemy == 3)){
+		*score += 200;
+	}
+}
