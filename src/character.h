@@ -25,14 +25,18 @@
 // Charazou
 // " 1 - Guerreiro\n 2 - Arqueiro\n 3 - Mago\n"
 struct character {
+	float total_hp;
 	float hp;
 	float damage;
 	int classe;
 	int weapon;
 	int sequence;
+	char  * name;
 };
 
 
 struct character create_character(int t );
+
+extern const char* chars[3];
 
 #endif /* CHARACTER_H_ */

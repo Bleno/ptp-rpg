@@ -34,9 +34,16 @@ void battle(struct character mainChar){
 
 
 void finalRules(struct character * mainChar, struct character * enemy){
+	float hp;
 	if( mainChar->classe == 1 && enemy->classe == 3 && mainChar->hp > 0){// vitoria do guerreiro contra o mago
-		mainChar->hp = mainChar->hp * 0.5; // 50% de hp pela vitória
-		//TODO ACRECENTAR 100 AO HP TOTAL
+		mainChar->sequence = 0;
+		mainChar->total_hp += 100;
+		hp = mainChar->hp + (mainChar->hp * 0.5); // 50% de hp pela vitória
+		if( hp > mainChar->total_hp){
+			mainChar->hp = mainChar->total_hp;
+		}else{
+			mainChar->hp = hp;
+		}
 	}
 }
 

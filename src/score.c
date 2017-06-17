@@ -1,26 +1,33 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "score.h"
 #include "menu.h"
 
 
-void score(){
-	int opt = 0;
-	char * line;
-	FILE *fp = fopen("score.data", "ab");
 
-	if (fp == NULL)
-	{
-		printf("Falha ao carregar score");
-		
-		exit(1);
-	}
-	fscanf(fp, "%s", line);
-	if(line == NULL){
-		printf("Não há records!\n");
+
+
+void score(){
+	int i, opt = 0;
+	FILE * arq;
+	char nome[50];
+
+	arq = fopen("score.data", "r");
+	if( arq == NULL){
+	  printf("Erro ao abrir o arquivo!");
 	}else{
-    	printf("%s\n", line );
+	  printf("*************************\n*        RECORDS        *\n*************************\n");
+	  
+	  while(fgets(nome, sizeof(nome), arq)){
+		  printf(" %s ", nome);
+	  }
+	  printf("\n*************************\n");
+	  fclose(arq);
 	}
+
+
+
 
 	while( opt != 1)
 	{
@@ -51,4 +58,16 @@ void countScore(int *score, int mainChar, int enemy){
 	}else if((mainChar == 3 && enemy == 1) || (mainChar == 1 && enemy == 2)  || (mainChar == 2 && enemy == 3)){
 		*score += 200;
 	}
+	storeScore(*score);
+}
+
+void storeScore(int score){
+  FILE * arq;
+  arq = fopen("score.data", "a+");
+  if( arq == NULL){
+      printf("Erro ao abrir o arquivo!");
+  }else{
+      fprintf(arq, "%d\n", score);
+      fclose(arq);
+  }
 }

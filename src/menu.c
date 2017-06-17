@@ -24,7 +24,7 @@ void menu(){
 			  break;
 			case 3:
 			  fflush(stdin);
-			printf("Goodbye!\n");
+			  printf("Goodbye!\n");
 			  exit(0);
 			  break;
 			default:
