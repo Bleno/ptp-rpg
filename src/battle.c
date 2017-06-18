@@ -24,6 +24,7 @@ void battle(struct character mainChar){
 		finalRules(&mainChar, &enemy);
 		if(mainChar.hp > 0){
 			countScore(&mainScore, mainChar.classe, enemy.classe);
+			printf("\n*** SCORE: %d ***\n", mainScore);
 		}
 		battle++;
     }
@@ -40,6 +41,20 @@ void finalRules(struct character * mainChar, struct character * enemy){
 		mainChar->total_hp += 100;
 		hp = mainChar->hp + (mainChar->hp * 0.5); // 50% de hp pela vitória
 		if( hp > mainChar->total_hp){
+			mainChar->hp = mainChar->total_hp;
+		}else{
+			mainChar->hp = hp;
+		}
+	}else if( mainChar->classe == 2 && enemy->classe == 1 ){ //vitoria do arqueiro contra o guerreiro
+		hp = mainChar->hp + ( mainChar->hp * 0.3 ); //30% de hp pela vitoria
+		if(hp > mainChar->total_hp){
+			mainChar->hp = mainChar->total_hp;
+		}else{
+			mainChar->hp = hp;
+		}
+	}else if( mainChar->classe == 3 && enemy->classe == 2){ // vitoria mago contra arqueiro
+		hp = mainChar->hp + (mainChar->hp * 0.7); // 70% pela vitoria 
+		if( hp > mainChar->total_hp ){
 			mainChar->hp = mainChar->total_hp;
 		}else{
 			mainChar->hp = hp;
@@ -94,12 +109,49 @@ void rules(int victory, struct character * mainChar, struct character * enemy){
    				enemy->hp = enemy->hp - mainChar->damage;
    				mainChar->sequence = 1;
    			}
+   		}else if(mainChar->classe == 2 && enemy->classe == 1){ // vitoria do arqueiro contra o guerreiro
+   			int chance = 0;
+   			chance = randInt(10);
+   			if( chance > 3){
+   				enemy->hp = enemy->hp - mainChar->damage;
+   			}else{
+   				mainChar->hp += 200;
+   				enemy->hp = enemy->hp - 200;
+   			}
+   		}else if(mainChar->classe == 3 && enemy->classe == 2){ //vitoria mago contra arqueiro
+   			enemy->hp -= mainChar->damage;
+   			mainChar->total_hp += mainChar->damage;
    		}else{
    				enemy->hp = enemy->hp - mainChar->damage;
    				mainChar->sequence = 0;
    		}
    }else{
-   	    mainChar->hp = mainChar->hp - enemy->damage;
+   		if(mainChar->classe == 2 && enemy->classe == 1){ // vitoria guerreiro contra arqueiro
+   			int chance = randInt(2);
+   			if (chance == 2)
+   			{
+   				printf("Ataque bloqueado!\n");
+   			}else{
+   				mainChar->hp = mainChar->hp - enemy->damage;	
+   			}
+   		}else if(mainChar->classe == 3 && enemy->classe == 2){ //vitoria arqueiro contra o mago
+   			int chance = randInt(10);
+   			if( chance > 4){
+   				mainChar->hp = mainChar->hp - enemy->damage;
+   			}else{
+   				enemy->hp -= 100;
+   				printf("## Counter-attack ##\n");
+   			}
+   		}else if( mainChar->classe == 3 && enemy->classe == 1){// vitoria do guerreiro contra o mago
+   			if( mainChar->sequence == 1 ){
+   				enemy->hp = enemy->hp - (mainChar->damage * 2);
+   			}else{
+   				enemy->hp = enemy->hp - mainChar->damage;
+   				mainChar->sequence = 1;
+   			}
+		}else{
+    		mainChar->hp = mainChar->hp - enemy->damage;
+    	}
    }
 }
 
@@ -121,5 +173,5 @@ void chooseEnemy( struct character * enemy ){
 	//srand( time( NULL ) );
 	int r = randInt(3);
 	printf("%d\n", r);
-	*enemy = ( struct character ) create_character(3);
+	*enemy = ( struct character ) create_character(2);
 }

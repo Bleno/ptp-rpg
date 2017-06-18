@@ -24,7 +24,7 @@ void sortArray(int * array, int length){
 
 
 int * unionArray(int * array1, int * array2){
-
+	return NULL;
 }
 
 #endif /* UTIL_H_ */
