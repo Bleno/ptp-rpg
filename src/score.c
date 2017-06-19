@@ -8,6 +8,7 @@
 
 
 
+
 void score(){
 	int i, opt = 0;
 	FILE * arq;
@@ -18,7 +19,6 @@ void score(){
 	  printf("Erro ao abrir o arquivo!");
 	}else{
 	  printf("*************************\n*        RECORDS        *\n*************************\n");
-	  
 	  while(fgets(nome, sizeof(nome), arq)){
 		  printf(" %s ", nome);
 	  }

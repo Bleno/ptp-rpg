@@ -6,9 +6,9 @@ void battle(struct character mainChar);
 
 void chooseEnemy( struct character * enemy);
 
-void chooseWeapon(int * weapon, int * weaponEnemy);
+void chooseWeapon(struct character * player, struct character * enemy);
 
-void duel(int * weapon, int * weaponEnemy, struct character * mainChar, struct character * enemy);
+void duel(struct character * player, struct character * enemy);
 
 void rules(int victory, struct character * mainChar, struct character * enemy);
 

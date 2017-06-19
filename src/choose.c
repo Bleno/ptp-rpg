@@ -7,7 +7,6 @@
 
 void choose(){
 	int opt = 0;
-	char nome[50];
 	struct character mainChar;
 	fflush(stdout);
 	printf("Escolha sua classe\n");
@@ -20,8 +19,7 @@ void choose(){
 			case 2:
 			case 3:
 			  mainChar = create_character(opt);
-			  printf("Digite o nome do seu char:\n");
-			  scanf("%s", nome);
+              mainChar.name = "Player1";
 			  printf("Você escolheu %s!\n Helth: %0.f, \n Damage %0.f\n",chars[opt - 1], mainChar.hp, mainChar.damage);
 			  battle(mainChar);
 			  break;
