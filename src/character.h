@@ -22,8 +22,9 @@
 
 
 
-// Charazou
-// " 1 - Guerreiro\n 2 - Arqueiro\n 3 - Mago\n"
+/* Charazou
+ " 1 - Guerreiro\n 2 - Arqueiro\n 3 - Mago\n"
+*/
 struct character {
 	float total_hp;
 	float hp;

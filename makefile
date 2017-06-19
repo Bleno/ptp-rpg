@@ -1,10 +1,17 @@
+CFLAGS = -Wall -pedantic
+LFLAGS = `sdl-config --libs` -lSDL -lSDL_image
+OBJS   = init.o input.o graphics.o menu.o main.o score.o choose.o character.o battle.o
 CC=gcc
-CFLAGS = -I
 PROG = ptp
 
-ptp: src/main.c src/menu.c src/menu.h src/choose.c src/choose.h src/score.c src/score.h src/character.c src/character.h src/battle.c src/battle.h 
-	$(CC) -o bin/$(PROG) src/main.c src/menu.c src/menu.h src/choose.c src/choose.h src/score.c src/score.h src/character.c src/character.h src/battle.c src/battle.h -I.
+all: $(PROG)
+
+%.o: src/%.c src/%.h src/defs.h
+	$(CC) $(CFLAGS) -c -s $<
+
+ptp: $(OBJS)
+	$(CC) $(OBJS) -o $(PROG) $(LFLAGS)
 
 clean:
-	rm -f bin/$(PROG)
+	rm -f bin/$(PROG) *.o
 #bin/ptp src/main.c src/menu.c src/menu.h

@@ -1,8 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "menu.h"
-#include "choose.h"
-#include "score.h"
+
 
 
 void menu(){

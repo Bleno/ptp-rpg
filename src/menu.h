@@ -1,3 +1,7 @@
+#include "defs.h"
+#include "choose.h"
+#include "score.h"
+
 #ifndef MENU_H_
 #define MENU_H_
 

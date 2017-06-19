@@ -36,8 +36,3 @@ struct character create_character(int type){
 }
 
 const char* chars[3] = {"Guerreiro", "Arqueiro", "Mago"};
-
-// char* chars(){
-// 	char* persons[] = {"Guerreiro", "Arqueiro", "Mago"};
-// 	return persons;
-// }
