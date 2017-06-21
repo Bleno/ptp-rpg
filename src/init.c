@@ -10,10 +10,23 @@ void init(char *title)
 		
 		exit(1);
 	}
+
+	/* Iniciar Fontes */
 	
-	/* Abre uma tela 800 x 600 */
+	if (TTF_Init() < 0)
+	{
+		printf("Couldn't initialize SDL TTF: %s\n", SDL_GetError());
+
+		exit(1);
+	}
 	
-	screen = SDL_SetVideoMode(800, 600, 0, SDL_HWPALETTE|SDL_DOUBLEBUF);
+	/* Tenta centralizar a tela */
+	putenv("SDL_VIDEO_WINDOW_POS=center");
+	
+	/* Abre uma tela 600 x 480 */
+	
+	screen = SDL_SetVideoMode(600, 400, 0, SDL_HWPALETTE|SDL_DOUBLEBUF);
+
 	
 	if (screen == NULL)
 	{

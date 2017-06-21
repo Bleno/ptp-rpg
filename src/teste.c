@@ -1,46 +1,34 @@
-#include "menu.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <SDL/SDL.h>
+#include <SDL/SDL_image.h>
+#include <SDL/SDL_ttf.h>
 
-extern void chooseInterface(void);
-
-void menu(){
-	int opt = 0;
-	int loop = 1;
-	while( loop == 1)
-	{
-		printf("Digite uma opcao\n");
-		printf(" 1 - Novo Jogo\n 2 - Records\n 3 - Sair\n");
-		scanf("%d", &opt);
-		switch (opt){
-			case 1:
-			  fflush(stdin);
-			  choose();
-			  break;
-			case 2:
-			  fflush(stdin);
-			  score();
-			  break;
-			case 3:
-			  fflush(stdin);
-			  printf("Goodbye!\n");
-			  exit(0);
-			  break;
-			default:
-			  fflush(stdin);
-			  printf("opcao invalida!\n");
-		}
-	}
-
-}
+void Confirm(SDL_Surface *screen);
+void Confirm2(SDL_Surface *screen);
 
 
-int drawMenu(){
-
-	SDL_Surface *b1 = NULL, *b2 = NULL, *b3 = NULL;
-	SDL_Rect posB1, posB2, posB3;
+int main(int argc, char *argv[]){
+	SDL_Surface *screen = NULL, *fond = NULL, *b1 = NULL, *b2 = NULL, *b3 = NULL;
+	SDL_Rect  posFond, posB1, posB2, posB3;
 	SDL_Event event;
 	int compteur = 1, compteur2 = 1, i = 1;
 
-	/* Centralizar o menu */
+	SDL_Init(SDL_INIT_VIDEO);
+	putenv("SDL_VIDEO_WINDOW_POS=center");
+
+	screen = SDL_SetVideoMode(600, 480, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
+
+	if(screen == NULL){
+		printf("Error: %s\n", SDL_GetError());
+		exit(EXIT_FAILURE);
+	}
+
+	SDL_WM_SetCaption("teste menu", NULL);
+
+	/*posFond.x = 0;
+	posFond.y = 0; */
+
 	posB1.x = (screen->w / 2) - 20;
 	posB1.y = screen->h / 2;
 
@@ -49,6 +37,8 @@ int drawMenu(){
 
 	posB3.x = (screen->w / 2) - 5 ;
 	posB3.y = (screen->h / 2) + 80;
+
+	/*fond = IMG_Load("gfx/dexter.jpg"); */
 
 	while( compteur != 0){
 
@@ -61,6 +51,7 @@ int drawMenu(){
 				b1 = IMG_Load("gfx/btn1_selected.png"); /*//img_selected */
 				b2 = IMG_Load("gfx/btn2.png");
 				b3 = IMG_Load("gfx/btn3.png");
+				/*SDL_BlitSurface(fond, NULL, screen, &posFond);*/
 				SDL_BlitSurface(b1, NULL, screen, &posB1);
 				SDL_BlitSurface(b2, NULL, screen, &posB2);
 				SDL_BlitSurface(b3, NULL, screen, &posB3);
@@ -74,6 +65,7 @@ int drawMenu(){
 				b1 = IMG_Load("gfx/btn1.png");
 				b2 = IMG_Load("gfx/btn2_selected.png"); /*//img_selected */
 				b3 = IMG_Load("gfx/btn3.png");
+				/*SDL_BlitSurface(fond, NULL, screen, &posFond);*/
 				SDL_BlitSurface(b1, NULL, screen, &posB1);
 				SDL_BlitSurface(b2, NULL, screen, &posB2);
 				SDL_BlitSurface(b3, NULL, screen, &posB3);
@@ -88,6 +80,7 @@ int drawMenu(){
 				b1 = IMG_Load("gfx/btn1.png");
 				b2 = IMG_Load("gfx/btn2.png");
 				b3 = IMG_Load("gfx/btn3_selected.png"); /*//img_selected */
+				/*SDL_BlitSurface(fond, NULL, screen, &posFond);*/
 				SDL_BlitSurface(b1, NULL, screen, &posB1);
 				SDL_BlitSurface(b2, NULL, screen, &posB2);
 				SDL_BlitSurface(b3, NULL, screen, &posB3);
@@ -152,7 +145,8 @@ int drawMenu(){
 									SDL_FreeSurface(b2);
 									SDL_FreeSurface(b3);
 
-									chooseInterface();
+									Confirm2(screen);
+									SDL_Flip(screen);
 									break;
 								case 2:
 									Confirm(screen);
@@ -170,13 +164,17 @@ int drawMenu(){
 		}
 	}
 
+	/*SDL_FreeSurface(fond);*/
 	SDL_FreeSurface(b1);
 	SDL_FreeSurface(b2);
 	SDL_FreeSurface(b3);
 
-	return 0;
+	SDL_Quit();
+
+	return EXIT_SUCCESS;
 
 }
+
 
 void Confirm(SDL_Surface *screen)
 {

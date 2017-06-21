@@ -12,9 +12,6 @@ int main(int argc, char *argv[]){
 
   int i, mode = 0;
 
-
-
-
   for(i = 0; i < argc; i++){
   	printf("%s\n", argv[i]);
   	if (strcmp("-interface", argv[i]) == 0){
@@ -22,6 +19,7 @@ int main(int argc, char *argv[]){
       mode = 1;
   	}
   }
+
   if(mode == 1){
     interface();
   }
@@ -45,7 +43,7 @@ void interface(){
 
   go = 1;
   
-  backgroundImage = loadImage("gfx/dexter.jpg");
+  backgroundImage = loadImage("gfx/startBg.png");
   /* If we get back a NULL image, just exit */
   
   if (backgroundImage == NULL)
@@ -60,6 +58,8 @@ void interface(){
     getInput();
     
     updateScreen();
+
+    go = drawMenu();
     
     /* Sleep briefly to stop sucking up all the CPU time */
     
