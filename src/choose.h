@@ -4,6 +4,7 @@
 
 SDL_Surface *screen, *backgroundImage;
 void choose();
+void drawImage2(SDL_Surface *s, int x, int y);
 
 
 #endif /* CHOOSE_H_ */

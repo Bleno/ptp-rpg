@@ -54,19 +54,14 @@ void delay(unsigned int frameLimit)
 
 
 void chooseInterface(){
-	unsigned int frameLimit = SDL_GetTicks() + 16;
 	SDL_Surface *opt1 = NULL, *opt2 = NULL, *opt3 = NULL, *s = NULL;
 	SDL_Rect posOpt1, posOpt2, posOpt3, bg, select;
 	TTF_Font *font = NULL;
 	SDL_Event e;
 	int goBack = 1, classSelected = 1;
 
-	backgroundImage = IMG_Load("gfx/wall.jpg");
-
 	bg.x = 0;
 	bg.y = 0;
-
-	SDL_BlitSurface(backgroundImage, NULL, screen, &bg);
 
 	posOpt1.y = (screen->h / 2) - 126;
 	posOpt1.x = 0;
@@ -79,6 +74,15 @@ void chooseInterface(){
 
 	select.x = posOpt1.x;
 	select.y = posOpt1.y;
+	
+	while(goBack != 0)
+	{
+
+	backgroundImage = IMG_Load("gfx/wall.jpg");
+
+
+	SDL_BlitSurface(backgroundImage, NULL, screen, &bg);
+
 
 
 	opt1 = IMG_Load("gfx/warrior_card.png");
@@ -98,8 +102,7 @@ void chooseInterface(){
 
 	SDL_Flip(screen);
 
-	while(goBack != 0)
-	{
+
 		SDL_WaitEvent(&e);
 
 	
@@ -118,33 +121,36 @@ void chooseInterface(){
 							classSelected = 3;
 							select.x = posOpt3.x;
 							select.y = posOpt3.y;
-							/*drawImage(s, posOpt3.x, posOpt3.y); */
-							SDL_BlitSurface(s, &select, screen, &posOpt3);
+							drawImage2(s, posOpt3.x, posOpt3.y);
 						}else if(classSelected == 2){
 							classSelected = 1;
 							select.x = posOpt1.x;
 							select.y = posOpt1.y;
-							/*drawImage(s, posOpt1.x, posOpt1.y); */
-							SDL_BlitSurface(s, &select, screen, &posOpt1);
+							drawImage2(s, posOpt1.x, posOpt1.y); 
 						}else{
 							classSelected = 2;
 							select.x = posOpt2.x;
 							select.y = posOpt2.y;
-							/*drawImage(s, posOpt2.x, posOpt2.y);*/
-							SDL_BlitSurface(s, &select, screen, &posOpt2);
+							drawImage2(s, posOpt2.x, posOpt2.y);
 						}
 						break;
 						
 					case SDLK_RIGHT:
 						if(classSelected == 3){
 							classSelected = 1;
-							drawImage(s, posOpt1.x, posOpt1.y);
+							select.x = posOpt1.x;
+							select.y = posOpt1.y;
+							drawImage2(s, posOpt1.x, posOpt1.y);
 						}else if(classSelected == 1){
 							classSelected = 2;
-							drawImage(s, posOpt2.x, posOpt2.y);
+							select.x = posOpt2.x;
+							select.y = posOpt2.y;
+							drawImage2(s, posOpt2.x, posOpt2.y);
 						}else{
 							classSelected = 3;
-							drawImage(s, posOpt3.x, posOpt3.y);
+							select.x = posOpt3.x;
+							select.y = posOpt3.y;
+							drawImage2(s, posOpt3.x, posOpt3.y);
 
 						}
 						break;
@@ -157,35 +163,34 @@ void chooseInterface(){
 					break;
 				}
 				break;
-			
-/*			case SDL_KEYUP:
-				switch (event.key.keysym.sym)
-				{
-					case SDLK_LEFT:
-						input.left = 0;
-						break;
-						
-					case SDLK_RIGHT:
-						input.right = 0;
-						break;
-					
-					default:
-						break;
-				}
-				break; */
 		}
 
-		SDL_UpdateRect(screen, 0, 0, 0, 0);
-		SDL_Flip(screen);
-		delay(frameLimit);
 		
-		frameLimit = SDL_GetTicks() + 16;
+		SDL_Flip(screen);
+		
 		printf("%d\n", classSelected);
-	
+		SDL_FillRect(screen,NULL,0x000000);
 	}
 
 	SDL_FreeSurface(opt1);
 	SDL_FreeSurface(opt2);
 	SDL_FreeSurface(opt3);
+	SDL_FreeSurface(s);
+
+}
+
+
+void drawImage2(SDL_Surface *s, int x, int y)
+{
+	SDL_Surface *tmp = NULL;
+	SDL_Rect pos;
+	pos.x = x;
+	pos.y = y;
+	tmp = IMG_Load("gfx/select.png");
+	SDL_BlitSurface(tmp, NULL, screen, &pos);
+	s = tmp;
+	SDL_FreeSurface(tmp);
+	SDL_Flip(screen);
+	
 
 }
