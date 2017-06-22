@@ -7,7 +7,9 @@
 
 int randInt(int num){
 	srand( time( NULL ) );
-	int r = ( rand() % num) + 1;
+	int r;
+    r = ( rand() % num) + 1;
+    return r;
 }
 
 void sortArray(int * array, int length){

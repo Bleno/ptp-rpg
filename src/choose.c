@@ -54,6 +54,7 @@ void delay(unsigned int frameLimit)
 
 
 void chooseInterface(){
+	unsigned int frameLimit = SDL_GetTicks() + 16;
 	SDL_Surface *opt1 = NULL, *opt2 = NULL, *opt3 = NULL, *s = NULL;
 	SDL_Rect posOpt1, posOpt2, posOpt3, bg, select;
 	TTF_Font *font = NULL;
@@ -154,6 +155,8 @@ void chooseInterface(){
 
 						}
 						break;
+					case SDLK_RETURN:
+						battleInterface(classSelected);
 					
 					case SDLK_ESCAPE:
 						goBack = 0;
@@ -170,6 +173,10 @@ void chooseInterface(){
 		
 		printf("%d\n", classSelected);
 		SDL_FillRect(screen,NULL,0x000000);
+
+		delay(frameLimit);
+		
+		frameLimit = SDL_GetTicks() + 16;
 	}
 
 	SDL_FreeSurface(opt1);

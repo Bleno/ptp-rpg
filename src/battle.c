@@ -64,31 +64,31 @@ void finalRules(struct character * player, struct character * enemy){
 
 
 void duel(struct character * player, struct character * enemy){
- //1 pedra
- //2 tesoura
- //3 papel
- printf("Duello\n");
- int w = player->weapon;
- int e = enemy->weapon;
- if(w == e){
- 	printf("Empate\n");
- 	empate(player, enemy);
- }else{
- 	if(w == 3 && e == 1){
- 		printf("Você ganhou!\n");
- 		enemy->hp = enemy->hp - player->damage;
- 		rules(1, player, enemy);
- 	}else if( w == 1 && e ==  2){
- 		printf("Você ganhou!\n");
- 		rules(1, player, enemy);
- 	}else if(w == 2 && e == 3){
- 		printf("Você ganhou!\n");
- 		enemy->hp = enemy->hp - player->damage;
- 	}else{
- 		printf("Você perdeu!\n");
- 		rules(0, player, enemy);
- 	}
- }
+    //1 pedra
+    //2 tesoura
+    //3 papel
+    printf("Duello\n");
+    int w = player->weapon;
+    int e = enemy->weapon;
+    if(w == e){
+    	printf("Empate\n");
+    	empate(player, enemy);
+    }else{
+    	if(w == 3 && e == 1){
+    		printf("Você ganhou!\n");
+    		enemy->hp = enemy->hp - player->damage;
+    		rules(1, player, enemy);
+    	}else if( w == 1 && e ==  2){
+    		printf("Você ganhou!\n");
+    		rules(1, player, enemy);
+    	}else if(w == 2 && e == 3){
+    		printf("Você ganhou!\n");
+    		enemy->hp = enemy->hp - player->damage;
+    	}else{
+    		printf("Você perdeu!\n");
+    		rules(0, player, enemy);
+    	}
+    }
  
 }
 
@@ -185,4 +185,33 @@ void chooseEnemy( struct character * enemy ){
 	printf("%d\n", r);
 	*enemy = ( struct character ) create_character(r);
    enemy->name = (char *) chars[r - 1];
+}
+
+
+
+void battleInterface(int classePlayer)
+{
+   SDL_Surface *fond = NULL;
+   SDL_Rect pos;
+   SDL_Event e;
+   int compteur = 1;
+   fond = IMG_Load("gfx/bg2.jpg");
+
+   pos.x = 0;
+   pos.y = 0;
+
+   SDL_BlitSurface(fond, NULL, screen, &pos);
+   SDL_Flip(screen);
+
+   while(compteur != 0)
+   {
+      SDL_WaitEvent(&e);
+
+      if(e.key.keysym.sym == SDLK_ESCAPE)
+      {
+         compteur = 0;
+      }
+   }
+
+   SDL_FreeSurface(fond);
 }

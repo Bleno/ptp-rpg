@@ -1,6 +1,7 @@
 #include "menu.h"
 
 extern void chooseInterface(void);
+extern void drawScore(void);
 
 void menu(){
 	int opt = 0;
@@ -41,13 +42,13 @@ int drawMenu(){
 	int compteur = 1, compteur2 = 1, i = 1;
 
 	/* Centralizar o menu */
-	posB1.x = (screen->w / 2) - 20;
+	posB1.x = (screen->w / 2) - 55;
 	posB1.y = screen->h / 2;
 
-	posB2.x = (screen->w / 2) - 10;
+	posB2.x = (screen->w / 2) - 43;
 	posB2.y =  (screen->h / 2) + 40;
 
-	posB3.x = (screen->w / 2) - 5 ;
+	posB3.x = (screen->w / 2) - 20 ;
 	posB3.y = (screen->h / 2) + 80;
 
 	while( compteur != 0){
@@ -147,15 +148,11 @@ int drawMenu(){
 							switch(i)
 							{
 								case 1:
-									/*SDL_FreeSurface(fond);*/
-									SDL_FreeSurface(b1);
-									SDL_FreeSurface(b2);
-									SDL_FreeSurface(b3);
-
+									compteur2 = 0;
 									chooseInterface();
 									break;
 								case 2:
-									Confirm(screen);
+									drawScore();
 									break;
 								case 3:
 									compteur = 0;
@@ -176,59 +173,4 @@ int drawMenu(){
 
 	return 0;
 
-}
-
-void Confirm(SDL_Surface *screen)
-{
-	SDL_Surface *fond = NULL;
-	SDL_Rect pos;
-	SDL_Event e;
-	int compteur = 1;
-	fond = IMG_Load("gfx/choose.png");
-
-	pos.x = 0;
-	pos.y = 0;
-
-	SDL_BlitSurface(fond, NULL, screen, &pos);
-	SDL_Flip(screen);
-
-	while(compteur != 0)
-	{
-		SDL_WaitEvent(&e);
-
-		if(e.key.keysym.sym == SDLK_ESCAPE)
-		{
-			compteur = 0;
-		}
-	}
-
-	SDL_FreeSurface(fond);
-}
-
-
-void Confirm2(SDL_Surface *screen)
-{
-	SDL_Surface *fond = NULL;
-	SDL_Rect pos;
-	SDL_Event e;
-	int compteur = 1;
-	fond = IMG_Load("gfx/bg2.jpg");
-
-	pos.x = 0;
-	pos.y = 0;
-
-	SDL_BlitSurface(fond, NULL, screen, &pos);
-	SDL_Flip(screen);
-
-	while(compteur != 0)
-	{
-		SDL_WaitEvent(&e);
-
-		if(e.key.keysym.sym == SDLK_ESCAPE)
-		{
-			compteur = 0;
-		}
-	}
-
-	SDL_FreeSurface(fond);
 }
