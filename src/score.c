@@ -136,9 +136,30 @@ void drawScore()
 
 void getScore()
 {
-	TTF_Font *goBack = NULL;
-	char *scores;
-	scores = readScore();
-	goBack = loadFont("font/OpenSans-Regular.ttf", 16);
-	drawString(scores, 0, 0 , goBack, 1, 1);
+	TTF_Font *font = NULL;
+	int i, posLIne = 50 ;
+	FILE * arq;
+	char nome[50], text[50];
+	  /* score */
+
+  	font = loadFont("font/OpenSans-Regular.ttf", 16);
+
+
+	arq = fopen("score.data", "r");
+	if( arq == NULL){
+	  printf("Erro ao abrir o arquivo!");
+	}else{
+	  i = 1;
+	  while(fgets(nome, sizeof(nome), arq)){
+
+		sprintf(text, "%d: %s", i, nome);
+		drawString(text, 10, posLIne, font, 1, 0);
+		i++;
+		posLIne += 20;
+	  }
+	}
+	  
+	fclose(arq);
+
+
 }

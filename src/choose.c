@@ -6,6 +6,7 @@
 
 
 extern void drawImage(SDL_Surface *, int, int);
+extern void delay(unsigned int );
 
 void choose(){
 	int opt = 0;
@@ -32,25 +33,7 @@ void choose(){
 
 }
 
-void delay(unsigned int frameLimit)
-{
-	unsigned int ticks = SDL_GetTicks();
 
-	if (frameLimit < ticks)
-	{
-		return;
-	}
-	
-	if (frameLimit > ticks + 16)
-	{
-		SDL_Delay(16);
-	}
-	
-	else
-	{
-		SDL_Delay(frameLimit - ticks);
-	}
-}
 
 
 void chooseInterface(){
@@ -199,5 +182,4 @@ void drawImage2(SDL_Surface *s, int x, int y)
 	SDL_FreeSurface(tmp);
 	SDL_Flip(screen);
 	
-
 }

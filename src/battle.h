@@ -1,3 +1,4 @@
+#include "defs.h"
 #include "character.h"
 #ifndef  BATTLE_H_
 #define  BATTLE_H_
@@ -24,5 +25,13 @@ void finalRules(struct character * mainChar, struct character * enemy);
 
 /* INTERFACE GRAFICA */
 void battleInterface(int classePlayer);
+void createScene(SDL_Surface *bg, int *score);
+void startPlayers();
+void updateLife(struct character *player, struct character *enemy);
+float calculatePercente(float total, float atual);
+SDL_Surface *barLife(float percente);
+
+int controller();
+void chooseWeaponInterface(struct character * player, struct character * enemy);
 
 #endif /* BATTLE_H_ */

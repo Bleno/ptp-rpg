@@ -38,6 +38,14 @@ void init(char *title)
 	/* Set o title pra tela */
 	
 	SDL_WM_SetCaption(title, NULL);
+
+
+	if ( !SDL_ShowCursor(SDL_DISABLE))
+	{
+		printf("Cursor Error: %s\n", SDL_GetError());
+
+		exit(1);
+	}
 }
 
 void cleanup()

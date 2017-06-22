@@ -1,3 +1,4 @@
+#include "defs.h"
 #ifndef CHARACTER_H_
 #define CHARACTER_H_ 
 
@@ -33,6 +34,8 @@ struct character {
 	int weapon;
 	int sequence;
 	char  * name;
+	SDL_Surface * sprite;
+	SDL_Rect * position;
 };
 
 
