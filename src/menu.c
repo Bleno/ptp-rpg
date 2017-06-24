@@ -107,6 +107,7 @@ int drawMenu(){
 
 			switch(event.type)
 			{
+
 				case SDL_QUIT:
 					compteur = 0;
 					break;
@@ -159,7 +160,11 @@ int drawMenu(){
 									break;
 							}
 							break;
+						default:
+							break;
 					}
+					break;
+				default:
 					break;
 			}
 

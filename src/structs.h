@@ -13,4 +13,4 @@ typedef struct Game
 {
 	struct character *player;
 	TTF_Font *font;
-};
+} Game;

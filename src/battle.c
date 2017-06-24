@@ -205,15 +205,15 @@ void battleInterface(int classePlayer)
 
 
   posPlayer.x = 10;
-  posPlayer.y = screen->h - 50;
+  posPlayer.y = screen->h - 130;
 
   posEnemy.x  = screen->w - 50;
   posEnemy.y  = screen->h - 50;
 
    
-
+    chooseEnemy(&enemy);
    player =  create_character(classePlayer);
-   enemy.sprite = IMG_Load("gfx/wz0-e.png");
+   enemy.sprite = IMG_Load("gfx/a0-e.png");
    player.sprite = IMG_Load("gfx/wz0.png");
    posPlayer.x = 10;
 
@@ -226,6 +226,7 @@ void battleInterface(int classePlayer)
 
    while(battle < MAX_BATTLES  && player.hp > 0)
    {
+
       chooseWeaponInterface(&player, &enemy);
 
       duel(&player, &enemy);
@@ -238,6 +239,8 @@ void battleInterface(int classePlayer)
       {
          battle = 11;
       }
+      battle++;
+      
    }
 
   finalRules(&player, &enemy);
@@ -245,6 +248,10 @@ void battleInterface(int classePlayer)
    SDL_FreeSurface(bg);
 }
 
+
+void createEnemy(){
+
+}
 
 
 void createScene(SDL_Surface *bg, int *score){

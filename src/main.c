@@ -43,7 +43,7 @@ void interface(){
 
   go = 1;
   
-  backgroundImage = loadImage("gfx/startBg.png");
+  backgroundImage = loadImage("gfx/arena.png");
   /* If we get back a NULL image, just exit */
   
   if (backgroundImage == NULL)
