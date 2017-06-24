@@ -1,5 +1,6 @@
 #include "graphics.h"
 
+
 SDL_Surface *loadImage(char *name)
 {
 	/* Load the image using SDL Image */
@@ -49,137 +50,24 @@ void drawImage(SDL_Surface *image, int x, int y)
 	
 	/* Blit the entire image onto the screen at coordinates x and y */
 	
-	SDL_BlitSurface(image, NULL, screen, &dest);
+	SDL_BlitSurface(image, NULL, game.screen, &dest);
 }
 
 void updateScreen()
 {
 	/* Blank the screen */
 	
-	SDL_FillRect(screen, NULL, 0);
+	/* SDL_FillRect(screen, NULL, 0); */
 	
 	/* Draw the image to 160, 120 */
 	
-	drawImage(backgroundImage, 0, 0);
+	/* drawImage(backgroundImage, 0, 0); */
 	
 	/* Swap the image buffers */
 	
-	SDL_Flip(screen);
+	/* SDL_Flip(screen); */
 }
 
-
-void drawHitBox(int startX, int startY, int w, int h)
-{
-	int x, y;
-	Uint32 red, transparent;
-	SDL_Rect dest;
-	SDL_Surface *image;
-
-	red = SDL_MapRGB(screen->format, 255, 0, 0);
-
-	transparent = SDL_MapRGB(screen->format, 127, 255, 127);
-
-	image = createSurface(w, h);
-
-	if (SDL_MUSTLOCK(image))
-	{
-		SDL_LockSurface(image);
-	}
-
-	for (y=0;y<image->h;y++)
-	{
-		for (x=0;x<image->w;x++)
-		{
-			if (y == 0 || y == (image->h - 1))
-			{
-				putPixel(image, x, y, red);
-			}
-
-			else if (x == 0 || x == (image->w - 1))
-			{
-				putPixel(image, x, y, red);
-			}
-
-			else
-			{
-				putPixel(image, x, y, transparent);
-			}
-		}
-	}
-
-	if (SDL_MUSTLOCK(image))
-	{
-		SDL_UnlockSurface(image);
-	}
-
-	SDL_SetColorKey(image, SDL_RLEACCEL|SDL_SRCCOLORKEY, SDL_MapRGB(image->format, 127, 255, 127));
-
-	dest.x = startX;
-	dest.y = startY;
-	dest.w = image->w;
-	dest.h = image->h;
-
-	SDL_BlitSurface(image, NULL, screen, &dest);
-
-	SDL_FreeSurface(image);
-}
-
-
-static void putPixel(SDL_Surface *surface, int x, int y, Uint32 pixel)
-{
-	int bpp = surface->format->BytesPerPixel;
-
-	Uint8 *p = (Uint8 *)surface->pixels + y * surface->pitch + x * bpp;
-
-	switch (bpp)
-	{
-		case 1:
-		case 8:
-			*p = pixel;
-		break;
-
-		case 2:
-		case 16:
-			*(Uint16 *)p = pixel;
-		break;
-
-		case 3:
-		case 24:
-			if (SDL_BYTEORDER == SDL_BIG_ENDIAN)
-			{
-				p[0] = (pixel >> 16) & 0xff;
-				p[1] = (pixel >> 8) & 0xff;
-				p[2] = pixel & 0xff;
-			}
-
-			else
-			{
-				p[0] = pixel & 0xff;
-				p[1] = (pixel >> 8) & 0xff;
-				p[2] = (pixel >> 16) & 0xff;
-			}
-		break;
-
-		case 4:
-		case 32:
-			*(Uint32 *)p = pixel;
-		break;
-	}
-}
-
-
-SDL_Surface *createSurface(int width, int height)
-{
-	SDL_Surface *temp, *newSurface;
-
-	temp = SDL_CreateRGBSurface(SDL_HWSURFACE, width, height, screen->format->BitsPerPixel, screen->format->Rmask, screen->format->Gmask, screen->format->Bmask, 0);
-
-	newSurface = SDL_DisplayFormat(temp);
-
-	SDL_FreeSurface(temp);
-
-	return newSurface;
-}
 
 
 void delay(unsigned int frameLimit)
@@ -200,4 +88,54 @@ void delay(unsigned int frameLimit)
 	{
 		SDL_Delay(frameLimit - ticks);
 	}
+}
+
+void loadSprite(int index, char *name)
+{
+	/* Load the image into the next slot in the sprite bank */
+	
+	if (index >= MAX_SPRITES || index < 0)
+	{
+		printf("Invalid index for sprite! Index: %d Maximum: %d\n", index, MAX_SPRITES);
+		
+		exit(1);
+	}
+	
+	sprite[index].image = loadImage(name);
+	printf("loadSprite\n");
+	
+	if (sprite[index].image == NULL)
+	{
+		printf("saiu image null\n");
+		exit(1);
+	}
+}
+
+void loadAllSprites()
+{
+	printf("loadAllSprites\n");
+	loadSprite( BACKGROUND, "gfx/arena.png");
+	loadSprite( MAIN_MENU_ITEM1, "gfx/btn1.png");
+	loadSprite( MAIN_MENU_ITEM2, "gfx/btn2.png");
+	loadSprite( MAIN_MENU_ITEM3, "gfx/btn3.png");
+	loadSprite( MAIN_MENU_ITEM1_SELECTED, "gfx/btn1_selected.png");
+	loadSprite( MAIN_MENU_ITEM2_SELECTED, "gfx/btn2_selected.png");
+	loadSprite( MAIN_MENU_ITEM3_SELECTED, "gfx/btn3_selected.png");
+}
+
+SDL_Surface *getSprite(int index)
+{
+	printf("%d\n", index);
+	if (index >= MAX_SPRITES || index < 0)
+	{
+		printf("Invalid index for sprite! Index: %d Maximum: %d\n", index, MAX_SPRITES);
+		
+		exit(1);
+	}
+
+	if(sprite[index].image == NULL){
+		printf("Sprite is null\n");
+	}
+	
+	return sprite[index].image;
 }

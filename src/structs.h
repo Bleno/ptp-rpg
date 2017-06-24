@@ -1,4 +1,4 @@
-#include <defs.h>
+#include "defs.h"
 
 
 typedef struct Label
@@ -11,6 +11,30 @@ typedef struct Label
 
 typedef struct Game
 {
-	struct character *player;
+	int score;
+	SDL_Surface *screen;
 	TTF_Font *font;
 } Game;
+
+typedef struct Sprites
+{
+	SDL_Surface *image;
+} Sprites;
+
+typedef struct Entity
+{
+	int x, y;
+	SDL_Surface *sprite;
+} Entity;
+
+typedef struct MenuControl
+{
+	int up, down;
+} MenuControl;
+
+
+typedef struct MenuItem
+{
+	int index;
+	Entity entity;
+} MenuItem;

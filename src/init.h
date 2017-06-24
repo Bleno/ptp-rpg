@@ -1,3 +1,3 @@
-#include "defs.h"
+#include "structs.h"
 
-extern SDL_Surface *screen, *backgroundImage;
+extern Game game;

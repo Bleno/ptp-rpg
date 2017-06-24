@@ -1,11 +1,8 @@
-#include "defs.h"
+#include "structs.h"
 
-extern SDL_Surface *screen, *backgroundImage;
+extern Sprites sprite[MAX_SPRITES];
+extern Game game;
 
-static void putPixel(SDL_Surface *surface, int x, int y, Uint32 pixel);
-
-SDL_Surface *createSurface(int width, int height);
-
-void drawHitBox(int startX, int startY, int w, int h);
+SDL_Surface *getSprite(int index);
 
 void delay(unsigned int frameLimit);

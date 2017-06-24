@@ -1,4 +1,7 @@
-#include "defs.h"
+#include "structs.h"
 
-SDL_Surface *screen, *backgroundImage;
+Game game;
+MenuControl input;
+Sprites sprite[MAX_SPRITES];
+
 void interface();

@@ -1,12 +1,14 @@
 #include "main.h"
-#include "menu.h"
 
 
 extern void init(char *);
 extern void cleanup(void);
 extern void getInput(void);
-extern SDL_Surface *loadImage(char *);
-extern void updateScreen(void);
+extern void initMainMenu(void);
+extern void drawMenu(void);
+extern void doMenu(void);
+extern void loadAllSprites(void);
+extern void delay(unsigned int);
 
 int main(int argc, char *argv[]){
 
@@ -15,7 +17,7 @@ int main(int argc, char *argv[]){
   for(i = 0; i < argc; i++){
   	printf("%s\n", argv[i]);
   	if (strcmp("-interface", argv[i]) == 0){
-  		printf("Usar intercace!!!\n");
+  		printf("Usar interface!!!\n");
       mode = 1;
   	}
   }
@@ -24,7 +26,7 @@ int main(int argc, char *argv[]){
     interface();
   }
   else{
-    menu();
+    printf("Sem interface\n");
   }
 
   return 0;
@@ -32,41 +34,40 @@ int main(int argc, char *argv[]){
 
 
 void interface(){
-
+  unsigned int frameLimit = SDL_GetTicks() + 16;
   int go;
-  /* Start up SDL */
   
   init("PTP - RPG");
   
-  /* Limpa tela ao sair */
+  /* invoca a função limpar tela ao sair */
   atexit(cleanup);
 
   go = 1;
   
-  backgroundImage = loadImage("gfx/arena.png");
-  /* If we get back a NULL image, just exit */
-  
-  if (backgroundImage == NULL)
-  {
-    exit(0);
-  }
-  
-  /* Loop indefinitely for messages */
+  /* Load all sprites */
+  loadAllSprites();
+
+
+  /* init position menu */
+
+  initMainMenu();
+
   
   while (go == 1)
   {
     getInput();
-    
-    updateScreen();
 
-    go = drawMenu();
+    doMenu();
+
+    drawMenu();
     
-    /* Sleep briefly to stop sucking up all the CPU time */
-    
-    SDL_Delay(16);
+    delay(frameLimit);
+
+    frameLimit = SDL_GetTicks() + 16;
+
   }
   
-  /* Exit the program */
+
   
   exit(0);
 }

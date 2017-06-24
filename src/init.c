@@ -25,10 +25,10 @@ void init(char *title)
 	
 	/* Abre uma tela 600 x 480 */
 	
-	screen = SDL_SetVideoMode(600, 400, 0, SDL_HWPALETTE|SDL_DOUBLEBUF);
+	game.screen = SDL_SetVideoMode(600, 400, 0, SDL_HWPALETTE|SDL_DOUBLEBUF);
 
 	
-	if (screen == NULL)
+	if (game.screen == NULL)
 	{
 		printf("Nao foi possivel abrir a tela 800 x 600: %s\n", SDL_GetError());
 
@@ -52,10 +52,7 @@ void cleanup()
 {
 	/* libera image */
 	
-	if (backgroundImage != NULL)
-	{
-		SDL_FreeSurface(backgroundImage);
-	}
+	printf("Limpar imagens da memoria\n");
 	
 	/* Shut down SDL */
 	

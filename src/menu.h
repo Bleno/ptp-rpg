@@ -1,13 +1,19 @@
-#include "defs.h"
-#include "choose.h"
-#include "score.h"
+#include "structs.h"
 
 #ifndef MENU_H_
 #define MENU_H_
-SDL_Surface *screen, *backgroundImage;
+
+extern Game game;
+extern Sprites sprite[MAX_SPRITES];
+extern MenuControl input;
+
 void menu();
-int drawMenu();
-void Confirm(SDL_Surface *screen);
-void Confirm2(SDL_Surface *screen);
+void drawMenu();
+void doMenu();
+void drawMainMenu();
+
+
+MenuItem menuItem[3];
+int menuIndex;
 
 #endif /* MENU_H_ */
