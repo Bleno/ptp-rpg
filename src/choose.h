@@ -4,6 +4,7 @@
 
 extern Game game;
 extern Sprites sprite[MAX_SPRITES];
+extern Player player;
 
 MenuItem menuItem[3];
 Entity selectItem, background;

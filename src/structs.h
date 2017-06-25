@@ -38,3 +38,14 @@ typedef struct MenuItem
 	int index;
 	Entity entity;
 } MenuItem;
+
+
+/* Charazou
+ " 1 - Guerreiro\n 2 - Arqueiro\n 3 - Mago\n"
+*/
+typedef struct Player {
+	int total_hp, hp, damage;
+	int classe, weapon, sequence;
+	char  * name;
+	Entity sprite;
+} Player;

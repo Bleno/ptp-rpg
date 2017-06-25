@@ -150,7 +150,7 @@ void doChooseMenu()
 	}
 }
 
-void chooseInterface(){
+void chooseScene(){
 	unsigned int frameLimit = SDL_GetTicks() + 16;
 	loopChooseScene = 1;
 
@@ -172,19 +172,16 @@ void chooseInterface(){
 	switch(menuIndex)
 	{
 		case 0:
-			printf("Escolheu guerreiro\n");
-			break;
 		case 1:
-		    printf("Escolheu arqueiro\n");
-			break;
 		case 2:
-			printf("Esscolheu mago\n");
+			player = createPlayer(menuIndex);
 			break;
 		case 3:
 		    printf("escolheu sair\n");
 		    menuScene();
 		    break;
 		default:
+		    menuScene();
 		    break;
 
 	}

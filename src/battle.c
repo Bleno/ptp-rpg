@@ -516,3 +516,19 @@ void chooseWeaponInterface(struct character * player, struct character * enemy){
   enemy->weapon = randInt(3);
   player->weapon = controller();
 }
+
+
+void initBattleScene(){
+
+}
+
+void battleScene(){
+    unsigned int frameLimit = SDL_GetTicks() + 16;
+    loopBattleScene = 1;
+
+    while( loopBattleScene == 1){
+      delay(frameLimit);
+
+      frameLimit = SDL_GetTicks() + 16;
+    }
+}

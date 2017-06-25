@@ -6,7 +6,7 @@ extern SDL_Surface *getSprite(int);
 extern void drawScore(void);
 extern void delay(unsigned int);
 extern void getInput(void);
-extern void chooseInterface();
+extern void chooseScene();
 
 MenuItem createMenuItem(){
 	MenuItem item;
@@ -183,7 +183,7 @@ void menuScene(){
   {
   	case 0:
   		printf("Novo jogo\n");
-  		chooseInterface();
+  		chooseScene();
   		break;
   	case 1:
   	    printf("scoreScene\n");

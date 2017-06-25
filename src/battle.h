@@ -1,11 +1,12 @@
-#include "defs.h"
-#include "character.h"
+#include "structs.h"
 #ifndef  BATTLE_H_
 #define  BATTLE_H_
 
-extern SDL_Surface *screen, *backgroundImage;
+extern Game game;
+extern Player player;
 
-struct character *enemy, *player;
+Player enemy;
+int loopBattleScene;
 
 
 void battle(struct character mainChar);
