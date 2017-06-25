@@ -1,10 +1,20 @@
-#include "defs.h"
+#include "structs.h"
 #ifndef  CHOOSE_H_
 #define  CHOOSE_H_
 
-SDL_Surface *screen, *backgroundImage;
-void choose();
-void drawImage2(SDL_Surface *s, int x, int y);
+extern Game game;
+extern Sprites sprite[MAX_SPRITES];
 
+MenuItem menuItem[3];
+Entity selectItem, background;
+int loopChooseScene, menuIndex;
+
+void choose();
+void drawChooseMenu();
+void doMenu();
+void setChooseBackground();
+void initChooseMenuItems();
+void doChooseMenu();
+void drawChooseMenu();
 
 #endif /* CHOOSE_H_ */

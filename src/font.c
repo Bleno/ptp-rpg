@@ -47,12 +47,12 @@ void drawString(char *text, int x, int y, TTF_Font *font, int centerX, int cente
     
     /* Blit the entire surface to the screen */
 
-    dest.x = (centerX == 1 ? (screen->w - surface->w) / 2 : x);
-    dest.y = (centerY == 1 ? (screen->h - surface->h) / 2 : y);
+    dest.x = (centerX == 1 ? (game.screen->w - surface->w) / 2 : x);
+    dest.y = (centerY == 1 ? (game.screen->h - surface->h) / 2 : y);
     dest.w = surface->w;
     dest.h = surface->h;
 
-    SDL_BlitSurface(surface, NULL, screen, &dest);
+    SDL_BlitSurface(surface, NULL, game.screen, &dest);
     
     /* Free the generated string image */
 

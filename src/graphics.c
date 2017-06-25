@@ -114,6 +114,7 @@ void loadSprite(int index, char *name)
 void loadAllSprites()
 {
 	printf("loadAllSprites\n");
+	/* MAIN MENU SCENE */
 	loadSprite( BACKGROUND, "gfx/arena.png");
 	loadSprite( MAIN_MENU_ITEM1, "gfx/btn1.png");
 	loadSprite( MAIN_MENU_ITEM2, "gfx/btn2.png");
@@ -121,6 +122,14 @@ void loadAllSprites()
 	loadSprite( MAIN_MENU_ITEM1_SELECTED, "gfx/btn1_selected.png");
 	loadSprite( MAIN_MENU_ITEM2_SELECTED, "gfx/btn2_selected.png");
 	loadSprite( MAIN_MENU_ITEM3_SELECTED, "gfx/btn3_selected.png");
+
+	/* CHOOSE MENU SCENE */
+	loadSprite(BACKGROUND_CHOOSE_MENU, "gfx/wall.jpg");
+	loadSprite(CHOOSE_MENU_ITEM1, "gfx/warrior_card.png");
+	loadSprite(CHOOSE_MENU_ITEM2, "gfx/arrow_card.png");
+	loadSprite(CHOOSE_MENU_ITEM3, "gfx/wizzard_card.png");
+	loadSprite(CHOOSE_MENU_ITEM_SELECTED, "gfx/select.png");
+
 }
 
 SDL_Surface *getSprite(int index)

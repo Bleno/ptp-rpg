@@ -1,4 +1,4 @@
-#include "defs.h"
+#include "structs.h"
 #ifndef CHARACTER_H_
 #define CHARACTER_H_ 
 

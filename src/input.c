@@ -20,6 +20,9 @@ void getInput()
 					case SDLK_DOWN:
 						input.down = 1;
 						break;
+					case SDLK_RETURN:
+						input.enter = 1;
+						break;
 					default:
 						break;
 				}
@@ -32,6 +35,9 @@ void getInput()
 			    		break;
 			    	case SDLK_DOWN:
 			    		input.down = 0;
+			    		break;
+			    	case SDLK_RETURN:
+			    		input.enter = 0;
 			    		break;
 			    	default:
 			    		break;

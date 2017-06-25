@@ -1,8 +1,8 @@
-#include "defs.h"
+#include "structs.h"
 #ifndef  SCORE_H_
 #define  SCORE_H_
 
-extern SDL_Surface *screen, *backgroundImage;
+extern Game game;
 
 void score();
 

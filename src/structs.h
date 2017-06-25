@@ -29,7 +29,7 @@ typedef struct Entity
 
 typedef struct MenuControl
 {
-	int up, down;
+	int up, down, enter;
 } MenuControl;
 
 

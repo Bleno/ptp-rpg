@@ -1,148 +1,144 @@
 #include "choose.h"
-#include "character.h"
-#include "battle.h"
-#include "font.h"
-
 
 
 extern void drawImage(SDL_Surface *, int, int);
 extern void delay(unsigned int );
+extern MenuItem createMenuItem(void);
+extern void menuScene(void);
+extern SDL_Surface *getSprite(int);
+extern void drawString(char *, int, int, TTF_Font *, int, int);
 
-void choose(){
-	int opt = 0;
-	struct character mainChar;
-	fflush(stdout);
-	printf("Escolha sua classe\n");
-	printf(" 1 - Guerreiro\n 2 - Arqueiro\n 3 - Mago\n");
-	while( opt == 0 || opt > 3)
+
+void initChooseMenuItems(){
+	int i;
+
+	for (i = 0; i < 3; i++)
 	{
-		scanf("%d", &opt);
-		switch (opt){
-			case 1:
-			case 2:
-			case 3:
-			  mainChar = create_character(opt);
-              mainChar.name = "Player1";
-			  printf("Você escolheu %s!\n Helth: %0.f, \n Damage %0.f\n",chars[opt - 1], mainChar.hp, mainChar.damage);
-			  battle(mainChar);
-			  break;
-			default:
-			  printf("opcao invalida!\n");
-		}
+		menuItem[i] = createMenuItem();
+		menuItem[i].index = i;
 	}
+}
+
+void setChooseBackground(){
+	background.sprite = getSprite(BACKGROUND);
+	background.x = 0;
+	background.y = 0;
+}
+
+void initChooseMenu()
+{
+	initChooseMenuItems();
+	menuIndex = 0;
+
+	setChooseBackground();
+
+	menuItem[0].entity.sprite = getSprite(CHOOSE_MENU_ITEM1);
+	menuItem[1].entity.sprite = getSprite(CHOOSE_MENU_ITEM2);
+	menuItem[2].entity.sprite = getSprite(CHOOSE_MENU_ITEM3);
+	selectItem.sprite = getSprite(CHOOSE_MENU_ITEM_SELECTED);
+
+	menuItem[0].entity.y = (game.screen->h / 2) - 126;
+	menuItem[0].entity.x = 0;
+
+	menuItem[1].entity.y = (game.screen->h / 2) - 126; 
+	menuItem[1].entity.x = (game.screen->w / 2) - 87;
+
+	menuItem[2].entity.y = (game.screen->h / 2) - 126;
+	menuItem[2].entity.x = game.screen->w - 175;
+
+	selectItem.x = menuItem[0].entity.x;
+	selectItem.y = menuItem[0].entity.y;
+
+
+}
+
+void drawChooseMenuScreen()
+{
+	SDL_FillRect(game.screen, NULL, 0);
+
+	drawChooseMenu();
+
+	SDL_Flip(game.screen);
+
+	SDL_Delay(1);
+}
+
+
+void drawChooseMenu()
+{
+	int i;
+
+	drawImage(background.sprite, background.x, background.y);
+
+	drawString("Escolha sua classe", 10, 10, game.font, 1, 0);
+	drawString("[ESC] Para voltar", 10, (game.screen->h - 30) , game.font, 1, 0);
+
+	for (i = 0; i < 3; ++i)
+	{
+		drawImage(menuItem[i].entity.sprite, menuItem[i].entity.x, menuItem[i].entity.y);
+	}
+
+	drawImage(selectItem.sprite, selectItem.x, selectItem.y);
 
 }
 
 
-
-
-void chooseInterface(){
-	unsigned int frameLimit = SDL_GetTicks() + 16;
-	SDL_Surface *opt1 = NULL, *opt2 = NULL, *opt3 = NULL, *s = NULL;
-	SDL_Rect posOpt1, posOpt2, posOpt3, bg, select;
-	TTF_Font *font = NULL;
+void doChooseMenu()
+{
 	SDL_Event e;
-	int goBack = 1, classSelected = 1;
 
-	bg.x = 0;
-	bg.y = 0;
+	while(SDL_PollEvent(&e)){
 
-	posOpt1.y = (screen->h / 2) - 126;
-	posOpt1.x = 0;
-
-	posOpt2.y = (screen->h / 2) - 126; 
-	posOpt2.x = (screen->w / 2) - 87;
-
-	posOpt3.y = (screen->h / 2) - 126;
-	posOpt3.x = screen->w - 175;
-
-	select.x = posOpt1.x;
-	select.y = posOpt1.y;
-	
-	while(goBack != 0)
-	{
-
-	backgroundImage = IMG_Load("gfx/wall.jpg");
-
-
-	SDL_BlitSurface(backgroundImage, NULL, screen, &bg);
-
-
-
-	opt1 = IMG_Load("gfx/warrior_card.png");
-	opt2 = IMG_Load("gfx/arrow_card.png");
-	opt3 = IMG_Load("gfx/wizzard_card.png");
-	s = IMG_Load("gfx/select.png");
-	SDL_BlitSurface(opt1, NULL, screen, &posOpt1);
-	SDL_BlitSurface(opt2, NULL, screen, &posOpt2);
-	SDL_BlitSurface(opt3, NULL, screen, &posOpt3);
-	SDL_BlitSurface(s, NULL, screen, &select);
-	
-	font = loadFont("font/OpenSans-Regular.ttf", 16);
-	drawString("Escolha sua classe", 10, 10, font, 1, 0);
-	drawString("[ESC] Para voltar", 10, (screen->h - 30) , font, 1, 0);
-
-
-
-	SDL_Flip(screen);
-
-
-		SDL_WaitEvent(&e);
+		/*SDL_WaitEvent(&e); */
 
 	
 		switch (e.type)
 		{
 			
 			case SDL_QUIT:
-				goBack = 0;
 				break;
 			
 			case SDL_KEYDOWN:
 				switch (e.key.keysym.sym)
 				{
 					case SDLK_LEFT:
-						if(classSelected == 1){
-							classSelected = 3;
-							select.x = posOpt3.x;
-							select.y = posOpt3.y;
-							drawImage2(s, posOpt3.x, posOpt3.y);
-						}else if(classSelected == 2){
-							classSelected = 1;
-							select.x = posOpt1.x;
-							select.y = posOpt1.y;
-							drawImage2(s, posOpt1.x, posOpt1.y); 
+						if(menuIndex == 0){
+							menuIndex = 2;
+							selectItem.x = menuItem[menuIndex].entity.x;
+							selectItem.y = menuItem[menuIndex].entity.y;
+						}else if(menuIndex == 2){
+							menuIndex = 1;
+							selectItem.x = menuItem[menuIndex].entity.x;
+							selectItem.y = menuItem[menuIndex].entity.y;
 						}else{
-							classSelected = 2;
-							select.x = posOpt2.x;
-							select.y = posOpt2.y;
-							drawImage2(s, posOpt2.x, posOpt2.y);
+							menuIndex = 0;
+							selectItem.x = menuItem[menuIndex].entity.x;
+							selectItem.y = menuItem[menuIndex].entity.y;
 						}
 						break;
 						
 					case SDLK_RIGHT:
-						if(classSelected == 3){
-							classSelected = 1;
-							select.x = posOpt1.x;
-							select.y = posOpt1.y;
-							drawImage2(s, posOpt1.x, posOpt1.y);
-						}else if(classSelected == 1){
-							classSelected = 2;
-							select.x = posOpt2.x;
-							select.y = posOpt2.y;
-							drawImage2(s, posOpt2.x, posOpt2.y);
+						if(menuIndex == 0){
+							menuIndex = 1;
+							selectItem.x = menuItem[menuIndex].entity.x;
+							selectItem.y = menuItem[menuIndex].entity.y;
+						}else if(menuIndex == 1){
+							menuIndex = 2;
+							selectItem.x = menuItem[menuIndex].entity.x;
+							selectItem.y = menuItem[menuIndex].entity.y;
 						}else{
-							classSelected = 3;
-							select.x = posOpt3.x;
-							select.y = posOpt3.y;
-							drawImage2(s, posOpt3.x, posOpt3.y);
+							menuIndex = 0;
+							selectItem.x = menuItem[menuIndex].entity.x;
+							selectItem.y = menuItem[menuIndex].entity.y;
 
 						}
 						break;
 					case SDLK_RETURN:
-						battleInterface(classSelected);
+						loopChooseScene = 0;
 					
 					case SDLK_ESCAPE:
-						goBack = 0;
+						menuIndex = 3;
+						loopChooseScene = 0;
 						break;
 					
 					default:
@@ -151,35 +147,46 @@ void chooseInterface(){
 				break;
 		}
 
-		
-		SDL_Flip(screen);
-		
-		printf("%d\n", classSelected);
-		SDL_FillRect(screen,NULL,0x000000);
+	}
+}
+
+void chooseInterface(){
+	unsigned int frameLimit = SDL_GetTicks() + 16;
+	loopChooseScene = 1;
+
+	initChooseMenu();
+	
+	while(loopChooseScene != 0)
+	{
+
+
+		doChooseMenu();
+
+		drawChooseMenuScreen();
 
 		delay(frameLimit);
 		
 		frameLimit = SDL_GetTicks() + 16;
 	}
 
-	SDL_FreeSurface(opt1);
-	SDL_FreeSurface(opt2);
-	SDL_FreeSurface(opt3);
-	SDL_FreeSurface(s);
+	switch(menuIndex)
+	{
+		case 0:
+			printf("Escolheu guerreiro\n");
+			break;
+		case 1:
+		    printf("Escolheu arqueiro\n");
+			break;
+		case 2:
+			printf("Esscolheu mago\n");
+			break;
+		case 3:
+		    printf("escolheu sair\n");
+		    menuScene();
+		    break;
+		default:
+		    break;
 
-}
+	}
 
-
-void drawImage2(SDL_Surface *s, int x, int y)
-{
-	SDL_Surface *tmp = NULL;
-	SDL_Rect pos;
-	pos.x = x;
-	pos.y = y;
-	tmp = IMG_Load("gfx/select.png");
-	SDL_BlitSurface(tmp, NULL, screen, &pos);
-	s = tmp;
-	SDL_FreeSurface(tmp);
-	SDL_Flip(screen);
-	
 }

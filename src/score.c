@@ -1,6 +1,10 @@
 #include "score.h"
-#include "menu.h"
-#include "font.h"
+
+
+extern TTF_Font *loadFont(char *, int);
+extern void closeFont(TTF_Font *);
+extern void drawString(char *, int, int, TTF_Font *, int, int);
+extern void menuScene(void);
 
 void addStrings(char** str1, const char* str2,char del)
 {
@@ -36,31 +40,14 @@ char* readScore(){
 	return ptr;
 }
 
-void score(){
-	int opt = 1;
-	readScore();
-	while( opt != 1)
-	{
-		printf(" 1 - Voltar \n");
-		scanf("%d", &opt);
-		switch (opt){
-			case 1:
-			  menu();
-			  break;
-			default:
-			  printf("opcao invalida!\n");
-		}
-	}
-
-}
-
 
 void countScore(int *score, int mainChar, int enemy){
+	/*
 	// HIERAQUIA     | CORRESPONDENTES
 	// 3. MAGO       |  
 	// 2. ARQUEIRO   |
 	// 1. GUERREIRO  | 
-	// 0. MAGO || 3  |
+	// 0. MAGO || 3  | */
 	if(mainChar == enemy){
 		*score += 150;
 	}else if( (mainChar == 3 && enemy == 2) || (mainChar == 2 && enemy == 1)  || (mainChar == 1 && enemy == 3) ){
@@ -90,13 +77,13 @@ void drawScore()
 	SDL_Surface *bg = NULL;
 	SDL_Rect pos;
 	SDL_Event e;
-	char *scores;
+	int loop = 1;
 
 	/* Background */
 	bg = IMG_Load("gfx/arena.png");
 	pos.x = 0;
 	pos.y = 0;
-	SDL_BlitSurface(bg, NULL, screen, &pos);
+	SDL_BlitSurface(bg, NULL, game.screen, &pos);
 
 	
 	/* titulo */
@@ -105,16 +92,15 @@ void drawScore()
 	
 	/* Voltar */
 	goBack = loadFont("font/OpenSans-Regular.ttf", 16);
-	drawString("[ESC] Para voltar", 10, (screen->h - 30) , goBack, 1, 0);
+	drawString("[ESC] Para voltar", 10, (game.screen->h - 30) , goBack, 1, 0);
 
 
 	getScore();
 	
-	SDL_Flip(screen);
+	SDL_Flip(game.screen);
 	SDL_FreeSurface(bg);
 
 
-	int loop = 1;
 
 	while(loop != 0)
 	{
@@ -127,10 +113,11 @@ void drawScore()
 	}
 
 
+
 	closeFont(title);
 	closeFont(goBack);
-	SDL_FillRect(screen,NULL,0x000000);
-
+	SDL_FillRect(game.screen,NULL,0x000000);
+	menuScene();
 }
 
 

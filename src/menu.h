@@ -7,13 +7,17 @@ extern Game game;
 extern Sprites sprite[MAX_SPRITES];
 extern MenuControl input;
 
-void menu();
+void menuScene();
 void drawMenu();
 void doMenu();
 void drawMainMenu();
+void setBackground();
+MenuItem createMenuItem();
+void initMenuItems();
 
 
 MenuItem menuItem[3];
-int menuIndex;
+int menuIndex, loopMenuScene;
+Entity background;
 
 #endif /* MENU_H_ */
