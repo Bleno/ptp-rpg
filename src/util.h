@@ -1,3 +1,4 @@
+#include <time.h>
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
@@ -6,14 +7,16 @@
 #define  UTIL_H_
 
 int randInt(int num){
-	srand( time( NULL ) );
 	int r;
+    
+    srand( time( NULL ) );
     r = ( rand() % num) + 1;
     return r;
 }
 
 void sortArray(int * array, int length){
-	int i, j, aux;
+	int i, j, aux = 0;
+
 	for(i = 0; i < length; i++){
 		for (j = i + 1; j < length; j++)
 		{
@@ -29,7 +32,7 @@ void sortArray(int * array, int length){
 
 
 
-int * unionArray(int * array1, int * array2){
+int* unionArray(int * array1, int * array2){
 	return NULL;
 }
 
@@ -79,6 +82,15 @@ char** str_split(char* a_str, const char a_delim)
     return result;
 }                                                                                                                                                                                                                
   
+
+int calculatePercente(int total, int atual){
+  int aux, resp;
+  aux = atual * 100;
+  resp = aux / total;
+  printf("resp %d\n",resp );
+  return resp;
+}
+
 
 
 #endif /* UTIL_H_ */

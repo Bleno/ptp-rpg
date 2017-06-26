@@ -21,7 +21,7 @@ SDL_Surface *loadImage(char *name)
 	
 	/* Convert the image to the screen's native format */
 	
-	image = SDL_DisplayFormat(temp);
+	image = SDL_DisplayFormatAlpha(temp);
 	
 	SDL_FreeSurface(temp);
 	
@@ -130,6 +130,27 @@ void loadAllSprites()
 	loadSprite(CHOOSE_MENU_ITEM3, "gfx/wizzard_card.png");
 	loadSprite(CHOOSE_MENU_ITEM_SELECTED, "gfx/select.png");
 
+	/* BATTLE SCENE */
+	loadSprite(BACKGROUND_BATTLE, "gfx/rpg-battle.png");
+	loadSprite(LIFE_0,  "gfx/life0.png");
+	loadSprite(LIFE_10, "gfx/life10.png");
+	loadSprite(LIFE_20, "gfx/life20.png");
+	loadSprite(LIFE_30, "gfx/life30.png");
+	loadSprite(LIFE_40, "gfx/life40.png");
+	loadSprite(LIFE_50, "gfx/life50.png");
+	loadSprite(LIFE_60, "gfx/life60.png");
+	loadSprite(LIFE_70, "gfx/life70.png");
+	loadSprite(LIFE_80, "gfx/life80.png");
+	loadSprite(LIFE_90, "gfx/life90.png");
+	loadSprite(LIFE_100,"gfx/life100.png");
+
+	loadSprite(PLAYER_WIZARD, "gfx/wizard/wz0.png");
+	loadSprite(PLAYER_ARCHER, "gfx/archer/a0.png");
+	loadSprite(PLAYER_WARRIOR,"gfx/warrior/wr0.png");
+
+	loadSprite(ENEMY_WIZARD, "gfx/wizard/wz0-e.png");
+	loadSprite(ENEMY_ARCHER, "gfx/archer/a0-e.png");
+	loadSprite(ENEMY_WARRIOR,"gfx/warrior/wr0-e.png");
 }
 
 SDL_Surface *getSprite(int index)

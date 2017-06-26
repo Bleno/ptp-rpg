@@ -7,6 +7,8 @@ extern MenuItem createMenuItem(void);
 extern void menuScene(void);
 extern SDL_Surface *getSprite(int);
 extern void drawString(char *, int, int, TTF_Font *, int, int);
+extern Player createPlayer(int);
+extern void battleScene();
 
 
 void initChooseMenuItems(){
@@ -135,6 +137,7 @@ void doChooseMenu()
 						break;
 					case SDLK_RETURN:
 						loopChooseScene = 0;
+						break;
 					
 					case SDLK_ESCAPE:
 						menuIndex = 3;
@@ -169,12 +172,15 @@ void chooseScene(){
 		frameLimit = SDL_GetTicks() + 16;
 	}
 
+	printf("Escollheu opção %d\n", menuIndex);
+
 	switch(menuIndex)
 	{
 		case 0:
 		case 1:
 		case 2:
 			player = createPlayer(menuIndex);
+			battleScene();
 			break;
 		case 3:
 		    printf("escolheu sair\n");

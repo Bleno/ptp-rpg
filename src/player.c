@@ -1,7 +1,7 @@
 #include "player.h"
 
 
-struct character createPlayer(int type){
+Player createPlayer(int type){
 	Player player;
 	switch(type){
 		case 0:

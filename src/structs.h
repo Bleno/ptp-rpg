@@ -46,6 +46,6 @@ typedef struct MenuItem
 typedef struct Player {
 	int total_hp, hp, damage;
 	int classe, weapon, sequence;
-	char  * name;
-	Entity sprite;
+	char  *name;
+	Entity entity;
 } Player;
