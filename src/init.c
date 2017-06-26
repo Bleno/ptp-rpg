@@ -50,11 +50,22 @@ void init(char *title)
 
 void cleanup()
 {
+	int i;
+
 	/* libera image */
 	
 	printf("Limpar imagens da memoria\n");
 	
 	/* Shut down SDL */
+
+	for (i=0;i<MAX_SPRITES;i++)
+	{
+		if (sprite[i].image != NULL)
+		{
+			SDL_FreeSurface(sprite[i].image);
+		}
+	}
+
 	
 	SDL_Quit();
 }

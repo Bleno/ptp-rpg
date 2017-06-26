@@ -131,7 +131,7 @@ void loadAllSprites()
 	loadSprite(CHOOSE_MENU_ITEM_SELECTED, "gfx/select.png");
 
 	/* BATTLE SCENE */
-	loadSprite(BACKGROUND_BATTLE, "gfx/rpg-battle.png");
+	loadSprite(BACKGROUND_BATTLE, "gfx/arena2.png");
 	loadSprite(LIFE_0,  "gfx/life0.png");
 	loadSprite(LIFE_10, "gfx/life10.png");
 	loadSprite(LIFE_20, "gfx/life20.png");
@@ -151,11 +151,19 @@ void loadAllSprites()
 	loadSprite(ENEMY_WIZARD, "gfx/wizard/wz0-e.png");
 	loadSprite(ENEMY_ARCHER, "gfx/archer/a0-e.png");
 	loadSprite(ENEMY_WARRIOR,"gfx/warrior/wr0-e.png");
+
+	loadSprite(PEDRA, "gfx/pedra.png");
+	loadSprite(PAPEL, "gfx/papel.png");
+	loadSprite(TESOURA, "gfx/tesoura.png");
+
+	loadSprite(PEDRA_ENEMY, "gfx/pedra-e.png");
+	loadSprite(PAPEL_ENEMY, "gfx/papel-e.png");
+	loadSprite(TESOURA_ENEMY, "gfx/tesoura-e.png");
 }
 
 SDL_Surface *getSprite(int index)
 {
-	printf("%d\n", index);
+	/*printf("%d\n", index); */
 	if (index >= MAX_SPRITES || index < 0)
 	{
 		printf("Invalid index for sprite! Index: %d Maximum: %d\n", index, MAX_SPRITES);

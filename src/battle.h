@@ -6,10 +6,13 @@ extern Game game;
 extern Player player;
 
 Player enemy;
-int loopBattleScene, battle;
+int loopBattleScene, battle, relationMenu[6] = { PEDRA, TESOURA, PAPEL,  PEDRA_ENEMY, TESOURA_ENEMY,  PAPEL_ENEMY  };
+int indexBattleMenu;
 
 Entity lifeBar[2], background;
+MenuItem menuWeaponItem[2];
 
+int relationMenuEnemy[3] = { PEDRA_ENEMY, TESOURA_ENEMY, PAPEL_ENEMY  };
 /*
 void battle(struct character mainChar);
 
@@ -43,5 +46,7 @@ void setPlayer();
 void chooseEnemy();
 
 void controlWeapon();
+void setWeaponMenu();
+SDL_Surface *barLife(int playerPercent);
 
 #endif /* BATTLE_H_ */

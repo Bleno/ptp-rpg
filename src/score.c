@@ -121,12 +121,33 @@ void drawScore()
 }
 
 
+int* criaArray(int len){
+	int *arr = NULL, i;
+	FILE *f;
+
+	f = fopen("score.data", "r");
+	if( f == NULL){
+	  drawString("Não há records", 10, 50, game.font, 1, 0);
+	}else{
+
+		arr = malloc(sizeof(int) * len);
+		for (i = 0; i < len; i++)
+		{
+			fscanf(f, "%d", arr);
+		}
+		fclose(f);
+	}
+	return arr;
+}
+
+
 void getScore()
 {
 	TTF_Font *font = NULL;
 	int i, posLIne = 50 ;
 	FILE * arq;
 	char nome[50], text[50];
+	int *pontos = NULL;
 	  /* score */
 
   	font = loadFont("font/OpenSans-Regular.ttf", 16);
@@ -144,9 +165,11 @@ void getScore()
 		i++;
 		posLIne += 20;
 	  }
+	  pontos = criaArray(i);
+	  fclose(arq);
+
 	}
 	  
-	fclose(arq);
 
 
 }

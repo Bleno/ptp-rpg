@@ -14,4 +14,6 @@ void initScene();
 
 void getScore();
 
+int* criaArray(int len);
+
 #endif /* SCORE_H_ */

@@ -83,13 +83,9 @@ char** str_split(char* a_str, const char a_delim)
 }                                                                                                                                                                                                                
   
 
-int calculatePercente(int total, int atual){
-  int aux, resp;
-  aux = atual * 100;
-  resp = aux / total;
-  printf("resp %d\n",resp );
-  return resp;
-}
+
+
+
 
 
 
