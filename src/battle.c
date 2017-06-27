@@ -39,6 +39,7 @@ void setScore(){
   /* DISPLAY HP */
   sprintf(text, "HP: %d/%d", player.hp, player.total_hp);
   drawString(text, 20, 30, game.font, 0, 0);
+  
 
   sprintf(text, "HP: %d/%d", enemy.hp, enemy.total_hp);
   drawString(text, game.screen->w - 100, 30, game.font, 0, 0);
