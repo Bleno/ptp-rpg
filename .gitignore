@@ -2,3 +2,4 @@ ptp-rpg.sublime-project
 ptp-rpg.sublime-workspace
 bin/
 *.o
+ptp
