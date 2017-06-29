@@ -7,6 +7,7 @@ extern void drawScore(void);
 extern void delay(unsigned int);
 extern void getInput(void);
 extern void chooseScene();
+extern void playSound(int);
 
 MenuItem createMenuItem(){
 	MenuItem item;
@@ -73,18 +74,21 @@ void doMenu()
 								menuItem[menuIndex].entity.sprite = getSprite(MAIN_MENU_ITEM3_SELECTED);
 								menuItem[1].entity.sprite = getSprite(MAIN_MENU_ITEM2);
 								menuItem[0].entity.sprite = getSprite(MAIN_MENU_ITEM1);
+								playSound(CLICK_SOUND);
 								break;
 							case 1:
 								menuIndex = 0;
 								menuItem[menuIndex].entity.sprite = getSprite(MAIN_MENU_ITEM1_SELECTED);
 								menuItem[1].entity.sprite = getSprite(MAIN_MENU_ITEM2);
 								menuItem[2].entity.sprite = getSprite(MAIN_MENU_ITEM3);
+								playSound(CLICK_SOUND);
 								break;
 							case 2:
 								menuIndex = 1;
 								menuItem[menuIndex].entity.sprite = getSprite(MAIN_MENU_ITEM2_SELECTED);
 								menuItem[0].entity.sprite = getSprite(MAIN_MENU_ITEM1);
 								menuItem[2].entity.sprite = getSprite(MAIN_MENU_ITEM3);
+								playSound(CLICK_SOUND);
 								break;
 							default:
 								break;
@@ -98,18 +102,21 @@ void doMenu()
 								menuItem[menuIndex].entity.sprite = getSprite(MAIN_MENU_ITEM2_SELECTED);
 								menuItem[0].entity.sprite = getSprite(MAIN_MENU_ITEM1);
 								menuItem[2].entity.sprite = getSprite(MAIN_MENU_ITEM3);
+								playSound(CLICK_SOUND);
 								break;
 							case 1:
 								menuIndex = 2;
 								menuItem[menuIndex].entity.sprite = getSprite(MAIN_MENU_ITEM3_SELECTED);
 								menuItem[0].entity.sprite = getSprite(MAIN_MENU_ITEM1);
 								menuItem[1].entity.sprite = getSprite(MAIN_MENU_ITEM2);
+								playSound(CLICK_SOUND);
 								break;
 							case 2:
 								menuIndex = 0;
 								menuItem[menuIndex].entity.sprite = getSprite(MAIN_MENU_ITEM1_SELECTED);
 								menuItem[1].entity.sprite = getSprite(MAIN_MENU_ITEM2);
 								menuItem[2].entity.sprite = getSprite(MAIN_MENU_ITEM3);
+								playSound(CLICK_SOUND);
 								break;
 							default:
 								break;

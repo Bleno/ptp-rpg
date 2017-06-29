@@ -49,3 +49,9 @@ typedef struct Player {
 	char  *name;
 	Entity entity;
 } Player;
+
+
+typedef struct Sound
+{
+	Mix_Chunk *effect;
+} Sound;

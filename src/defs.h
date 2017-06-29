@@ -4,6 +4,7 @@
 #include "SDL/SDL.h"
 #include "SDL/SDL_image.h"
 #include "SDL/SDL_ttf.h"
+#include "SDL/SDL_mixer.h"
 
 /*
   WARRIOR
@@ -68,4 +69,12 @@ enum
 	PEDRA_ENEMY,
 	PAPEL_ENEMY,
 	TESOURA_ENEMY
+};
+
+
+#define MAX_SOUNDS 1
+
+enum
+{
+	CLICK_SOUND
 };

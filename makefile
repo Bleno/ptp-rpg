@@ -1,6 +1,6 @@
 CFLAGS = -Wall -pedantic
-LFLAGS = `sdl-config --libs` -lSDL -lSDL_image -lSDL_ttf
-OBJS   = init.o input.o graphics.o menu.o main.o font.o score.o choose.o player.o battle.o rules.o gameover.o
+LFLAGS = `sdl-config --libs` -lSDL -lSDL_image -lSDL_ttf -lSDL_mixer
+OBJS   = init.o input.o graphics.o menu.o main.o font.o score.o choose.o player.o battle.o rules.o gameover.o audio.o
 CC=gcc
 PROG = ptp
 

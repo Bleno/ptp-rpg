@@ -6,6 +6,7 @@ extern void cleanup(void);
 extern void loadAllSprites(void);
 extern TTF_Font *loadFont(char *, int);
 extern void menuScene(void);
+extern void loadAllSounds(void);
 
 int main(int argc, char *argv[]){
 
@@ -19,6 +20,8 @@ int main(int argc, char *argv[]){
   
   /* Load all sprites */
   loadAllSprites();
+
+  loadAllSounds();
 
   menuScene();
 
